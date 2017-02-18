@@ -4,12 +4,14 @@ let _ = require('lodash');
 let ps = require('current-processes');
 
 router.get('/', function (req, res, next) {
+    res.redirect('/admin/process');
+});
+router.get('/process', function (req, res, next) {
     res.render('admin/admin-process');
 });
 
-router.get('/info', function (req, res, next) {
+router.post('/process', function (req, res, next) {
     ps.get(function (err, processes) {
-
         let sorted = _.sortBy(processes, 'cpu');
         let top = sorted.reverse().splice(0, 5);
 
