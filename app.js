@@ -4,7 +4,6 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
-let partials = require('express-partials');
 let app = express();
 
 // view engine setup

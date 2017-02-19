@@ -12,9 +12,7 @@ router.get('/process', function (req, res, next) {
 
 router.post('/process', function (req, res, next) {
     ps.get(function (err, processes) {
-        let sorted = _.sortBy(processes, 'cpu');
-        let top = sorted.reverse().splice(0, 5);
-
+        let top = _.orderBy(processes, req.body.sort_type, req.body.sort_order == 1 ? 'asc' : 'desc');
         res.json(top);
     });
 
