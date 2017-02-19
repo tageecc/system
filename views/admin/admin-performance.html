@@ -35,21 +35,36 @@
                 x: 'right',
             },
             calculable: true,
-            xAxis: { data: [], orient: 'vertical' },
-            yAxis: { type: 'value' },
-            series: []
+            xAxis: {
+                type: 'time',
+                axisLabel: {
+                    formatter: function (value) {
+                        return value.toLocaleDateString() + " " + value.getHours();
+                    }
+                }
+            },
+            yAxis: {
+                type: "category",
+                data:[]
+            },
+            series: {
+                name: "2P1电表",
+                type: "line",
+                data: this.data
+            }
+
         },
         init: function () {
             this.render();
         },
         getData: function () {
             $.post('/admin/performance', function (res) {
-                console.log(res);
                 performance.data.push(res);
+                console.log(performance.data);
             });
         },
         render: function () {
-            var _this=this;
+            var _this = this;
             this.timer = setInterval(function () {
                 _this.getData();
 
