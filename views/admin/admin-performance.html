@@ -123,6 +123,9 @@
             $.post('/admin/performance', function (res) {
                 if (performance.cpu.data.length > 10) {
                     performance.cpu.data.shift();
+                    performance.mem.data.shift();
+                    performance.device.data.shift();
+                    performance.network.data.shift();
                 }
                 performance.cpu.data.push(res.cpu);
                 performance.mem.data.push(res.mem);
