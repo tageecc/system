@@ -22,7 +22,7 @@ router.post('/process', function (req, res, next) {
 });
 router.post('/performance', function (req, res, next) {
     osUtils.cpuUsage(function (value) {
-        res.json(value);
+        res.json({cpu:value,mem:1-osUtils.freememPercentage(),device:value,network:value});
     });
 });
 

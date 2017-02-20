@@ -81,7 +81,9 @@
         run: function () {
             var _this = this;
             _this.timer && clearInterval(_this.timer);
-            _this.timer = setInterval(_this.getData, _this.refresh * 1000);
+            if(_this.refresh!=0){
+                _this.timer = setInterval(_this.getData, _this.refresh * 1000);
+            }
         },
         getData: function () {
             $.post('/admin/process', {
