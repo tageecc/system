@@ -126,8 +126,16 @@
                 <li><a href="#"> <i class="icon-desktop"></i> 任务管理器
                     <i class="arrow icon-angle-left"></i></a>
                     <ul class="sub-menu">
+                        <li><a href="/admin/sysinfo" class="<%if(cur=='sysinfo'){%>cur<%}%>"><i class="icon-angle-right"></i> 信息 </a></li>
                         <li><a href="/admin/process" class="<%if(cur=='process'){%>cur<%}%>"><i class="icon-angle-right"></i> 进程 </a></li>
                         <li><a href="/admin/performance" class="<%if(cur=='performance'){%>cur<%}%>"><i class="icon-angle-right"></i> 性能 </a></li>
+                    </ul>
+                </li>
+                <li><a href="#"> <i class="icon-desktop"></i> Nginx
+                    <i class="arrow icon-angle-left"></i></a>
+                    <ul class="sub-menu">
+                        <li><a href="/admin/nginx" class="<%if(cur=='nginx'){%>cur<%}%>"><i class="icon-angle-right"></i> 信息 </a></li>
+                        <li><a href="/admin/website" class="<%if(cur=='website'){%>cur<%}%>"><i class="icon-angle-right"></i> 网站 </a></li>
                     </ul>
                 </li>
             </ul>
@@ -138,7 +146,7 @@
     </div>
 </div>
 <div class="bottom-nav footer">
-    2017 &copy; 塔歌.
+    2017 &copy; 塔歌
 </div>
 <script>
     $(function () {
@@ -162,7 +170,7 @@
                 }
             }
         });
-        $('#nav>li').trigger('click');
+        $('#nav>li:eq(0)').trigger('click');
     });
 </script>
 </body>

@@ -4,7 +4,7 @@ let _ = require('lodash');
 let ps = require('current-processes');
 
 router.get('/', function (req, res, next) {
-    res.render('admin/admin-process');
+    res.redirect('/admin/sysinfo');
 });
 
 router.get('/info', function (req, res, next) {

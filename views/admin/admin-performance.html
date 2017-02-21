@@ -74,25 +74,38 @@
         timer: null,
         option: {
             title: {
-                subtext: '%利用率',
+                subtext: '%使用率',
             },
             xAxis: {
                 splitLine: {
                     show: false
                 },
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
                 data: []
             },
             yAxis: {
-                name: '利用率：...',
+                name: '使用率：...',
                 nameLocation: 'start',
                 nameTextStyle: {
                     fontSize: '18',
                     color: '#fff'
                 },
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                },
                 type: "value",
             },
             series: [{
-                name: 'CPU利用率',
+                name: 'CPU使用率',
                 type: 'line',
                 showSymbol: false,
                 hoverAnimation: false,
@@ -138,7 +151,7 @@
             var persont = Math.round(_this.cpu.data[_this.cpu.data.length - 1] * 100);
             _this.cpu.chart.setOption({
                 yAxis: {
-                    name: persont ? '利用率：' + persont + '%' : '利用率：...'
+                    name: persont ? '使用率：' + persont + '%' : '使用率：...'
                 },
                 series: [{
                     data: _this.cpu.data
@@ -150,7 +163,7 @@
             var persont = Math.round(_this.mem.data[_this.mem.data.length - 1] * 100);
             _this.mem.chart.setOption({
                 yAxis: {
-                    name: persont ? '利用率：' + persont + '%' : '利用率：...'
+                    name: persont ? '使用率：' + persont + '%' : '使用率：...'
                 },
                 series: [{
                     data: _this.mem.data
@@ -162,7 +175,7 @@
             var persont = Math.round(_this.device.data[_this.device.data.length - 1] * 100);
             _this.device.chart.setOption({
                 yAxis: {
-                    name: persont ? '利用率：' + persont + '%' : '利用率：...'
+                    name: persont ? '使用率：' + persont + '%' : '使用率：...'
                 },
                 series: [{
                     data: _this.device.data
@@ -174,7 +187,7 @@
             var persont = Math.round(_this.network.data[_this.network.data.length - 1] * 100);
             _this.network.chart.setOption({
                 yAxis: {
-                    name: persont ? '利用率：' + persont + '%' : '利用率：...'
+                    name: persont ? '使用率：' + persont + '%' : '使用率：...'
                 },
                 series: [{
                     data: _this.network.data

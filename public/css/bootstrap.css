@@ -1896,19 +1896,19 @@ textarea.input-lg {
 }
 
 .btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active {
-    background-color: #ffffff;
-    border-color: #cccccc;
+    background-color: #fff;
+    border-color: #ccc;
 }
 
 .btn-primary {
-    color: #ffffff;
-    background-color: rgba(66, 139, 202, 0.55);
-    border-color: #357ebd;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
     color: #ffffff;
-    background-color: rgba(66, 139, 202, 0.45);
+    background-color: rgb(66, 139, 202);
     border-color: #285e8e;
 }
 
