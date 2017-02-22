@@ -43,5 +43,13 @@ router.get('/sysinfo', function (req, res, next) {
 router.get('/nginx', function (req, res, next) {
     res.render('admin/admin-nginx', {cur: 'nginx'});
 });
+/**
+ * 安装nginx
+ */
+router.get('/nginx/install', function (req, res, next) {
+
+
+    res.render('admin/admin-nginx', {cur: 'nginx'});
+});
 
 module.exports = router;
