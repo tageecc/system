@@ -4,6 +4,7 @@ let _ = require('lodash');
 let os = require("os");
 let osUtils = require("os-utils");
 let ps = require('current-processes');
+require('shelljs/global');
 
 router.get('/', function (req, res, next) {
     res.redirect('/admin/sysinfo');
@@ -41,7 +42,9 @@ router.get('/sysinfo', function (req, res, next) {
 });
 
 router.get('/nginx', function (req, res, next) {
-    res.render('admin/admin-nginx', {cur: 'nginx'});
+    let exist = exec('rpm -q nginx').stdout.length != 0;
+
+    res.render('admin/admin-nginx', {exist: exist, cur: 'nginx'});
 });
 
 module.exports = router;
