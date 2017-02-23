@@ -1,4 +1,7 @@
 <% layout('admin/layout.html') %>
+<script src="//cdn.bootcss.com/moment.js/2.16.0/moment.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/locale/zh-cn.js"></script>
+
 <div class="content container">
     <div class="row">
         <div class="col-lg-12">
@@ -10,21 +13,33 @@
                     <div class="panel-body">
                         <div class="form-horizontal row-border">
                             <div class="form-group lable-padd">
-                                <label class="col-sm-3">系统内核</label>
+                                <label class="col-sm-3">cpu架构</label>
+                                <div class="col-sm-6">
+                                    <input type="text" value="<%=arch%>" class="form-control mask" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group lable-padd">
+                                <label class="col-sm-3">操作系统内核：</label>
                                 <div class="col-sm-6">
                                     <input type="text" value="<%=kernel%>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
-                                <label class="col-sm-3">主机名</label>
+                                <label class="col-sm-3">平台：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" value="<%=platform%>" class="form-control mask" readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group lable-padd">
+                                <label class="col-sm-3">主机名:</label>
                                 <div class="col-sm-6">
                                     <input type="text" value="<%=hostname%>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
-                                <label class="col-sm-3">CPU</label>
+                                <label class="col-sm-3">主目录:</label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=cpu%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%=homedir%>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
@@ -36,7 +51,15 @@
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">开机时间</label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=uptime%>" class="form-control mask" readonly/>
+                                    <input id="uptime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                           readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group lable-padd">
+                                <label class="col-sm-3">运行时间</label>
+                                <div class="col-sm-6">
+                                    <input id="runtime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                           readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
@@ -52,3 +75,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    /*开机时间*/
+    $('#uptime').val(moment().subtract($('#uptime').data('value'), "second").format("YYYY-MM-DD dddda HH:mm:ss"));
+    /*运行时间*/
+    $('#runtime').val(moment.duration($('#runtime').data('value'), "second").humanize());
+
+    /* var dealTime = (seconds) => {
+     console.log(seconds);
+     var seconds = parseInt(seconds) | 0;
+     var day = (seconds / (3600 * 24)) | 0;
+     var hours = ((seconds - day * 3600) / 3600) | 0;
+     var minutes = ((seconds - day * 3600 * 24 - hours * 3600) / 60) | 0;
+     var second = seconds % 60;
+     (day < 10) && (day = '0' + day);
+     (hours < 10) && (hours = '0' + hours);
+     (minutes < 10) && (minutes = '0' + minutes);
+     (second < 10) && (second = '0' + second);
+     return [day, hours, minutes, second].join(':');
+     };*/
+</script>

@@ -30,11 +30,14 @@ router.post('/performance', function (req, res, next) {
 
 router.get('/sysinfo', function (req, res, next) {
     let data = {
+        arch: os.arch(),
+        platform: os.platform(),
         kernel: os.platform() + '  ' + os.release(),
         hostname: os.hostname(),
+        homedir: os.homedir(),
         cpu: os.cpus(),
         mem: os.totalmem,
-        uptime: os.uptime(),
+        uptime: parseInt(os.uptime()),
         network: os.networkInterfaces()
     };
     console.log(data);
