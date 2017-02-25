@@ -48,6 +48,7 @@ router.get('/sysinfo', function (req, res, next) {
 router.get('/nginx', function (req, res, next) {
     let data = {};
     let nginx = exec('nginx -V', {silent: true});
+    console.log(nginx);
     data.exist = nginx.code == '0';
     if (data.exist) {
         data.version = nginx.stderr.match(/nginx\/[0-9]+\.[0-9]+\.[0-9]+/);
@@ -59,8 +60,8 @@ router.get('/nginx', function (req, res, next) {
  * 安装nginx
  */
 router.get('/nginx/install', function (req, res, next) {
-
-    res.render('admin/admin-nginx', {cur: 'nginx'});
+    let nginx = exec('yum install nginx -y', {silent: true});
+    res.json({code: nginx.code});
 });
 
 
@@ -72,13 +73,13 @@ router.get('/website', function (req, res, next) {
         data.conf = nginx.stderr.match(/--conf-path=(\S+)\s/)[1];
 
         let config = fs.existsSync(data.conf) ? fs.readFileSync(data.conf, "utf-8") : '';
-        config.split('\n').filter(item => {
-            console.log(item[0]);
-            return item[0] != '#';
+        config = config.split('\n').filter(item => {
+            let line = item.replace(/(^\s*)/g, "");
+            return line.length > 0 && line[0] != '#'
         }).join('');
         console.log(config);
     }
-    console.log(data);
+    // console.log(data);
     res.render('admin/admin-website', {data: data, cur: 'website'});
 });
 

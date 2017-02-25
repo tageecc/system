@@ -181,5 +181,20 @@
         $('.cur').parents('.sub-menu').prev().trigger('click');
     });
 </script>
+
+<script>
+    /*安装nginx*/
+    $('#nginx_install').on('click', function () {
+        var $btn = $(this).button('loading');
+        $.getJSON('/admin/nginx/install', function (res) {
+            if (res.code == 0) {
+                $btn.button('complete');
+                setTimeout(function () {
+                    location.reload()
+                }, 500);
+            }
+        })
+    });
+</script>
 </body>
 </html>
