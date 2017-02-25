@@ -42,8 +42,6 @@ router.get('/sysinfo', function (req, res, next) {
         uptime: parseInt(os.uptime()),
         network: os.networkInterfaces()
     };
-    var a=os.networkInterfaces();
-    console.log(a);
     res.render('admin/admin-sysinfo', Object.assign({}, data, {cur: 'sysinfo'}));
 });
 
