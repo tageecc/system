@@ -26,9 +26,17 @@
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">CPU</label>
+                                <%cpu.forEach(function(v,i){%>
+                                <%if(i==0){%>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=cpu%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%=v.model%>" class="form-control mask" readonly/>
                                 </div>
+                                <%}else{%>
+                                <div class="col-sm-6 col-sm-offset-3 mgt">
+                                    <input type="text" value="<%=v.model%>" class="form-control mask" readonly/>
+                                </div>
+                                <%}%>
+                                <%})%>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">内存</label>
@@ -39,13 +47,57 @@
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">开机时间</label>
                                 <div class="col-sm-6">
-                                    <input id="uptime" type="text" value="<%=uptime%>" class="form-control mask" readonly/>
+                                    <input id="uptime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                           readonly/>
+                                </div>
+                            </div>
+                            <div class="form-group lable-padd">
+                                <label class="col-sm-3">运行时间</label>
+                                <div class="col-sm-6">
+                                    <input id="runtime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                           readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">网络</label>
-                                <div class="col-sm-6">
-                                    <input type="text" value="<%=network%>" class="form-control mask" readonly/>
+                                <div class="col-sm-6 mgt">
+                                    <div id="accordion2" class="panel-group">
+                                        <%Object.keys(network).forEach(function(v,i){%>
+                                        <div class="panel">
+                                            <div class="panel-heading">
+                                                <a href="#<%=v%>" data-parent="#accordion2"
+                                                   data-toggle="collapse"
+                                                   class="accordion-toggle collapsed">网卡名：
+                                                    <%=v%> </a>
+                                            </div>
+                                            <div style="height: 0;" class="panel-collapse collapse" id="<%=v%>">
+                                                <div class="panel-body">
+                                                    <table cellpadding="0" cellspacing="0" border="0" class="display"
+                                                           id="example">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>类型</th>
+                                                            <th>IP地址</th>
+                                                            <th>子网掩码</th>
+                                                            <th>Mac地址</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <%network[v].forEach(function(vv,ii){%>
+                                                        <tr class="gradeX">
+                                                            <td><%=vv.family%></td>
+                                                            <td><%=vv.address%></td>
+                                                            <td><%=vv.netmask%></td>
+                                                            <td><%=vv.mac%></td>
+                                                        </tr>
+                                                        <%})%>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%})%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,9 +109,34 @@
 </div>
 
 <script>
-//    $('#uptime').val(moment($('#uptime').val()).format())
-console.log(
-    moment().format('YY-MM-DD HH:mm:ss')
+    var uptime = $('#uptime').data('value');
+    $('#uptime').val(moment().subtract(uptime, "seconds").format('YYYY年MM月DD日 dddd HH:mm:ss'));
 
-)
+    (function getRunTime() {
+        $('#runtime').val(formatSeconds(uptime++));
+        setTimeout(function () {
+            getRunTime();
+        }, 1000);
+    })();
+    function formatSeconds(value) {
+        var theTime = parseInt(value);// 秒
+        var theTime1 = 0;// 分
+        var theTime2 = 0;// 小时
+        if (theTime > 60) {
+            theTime1 = parseInt(theTime / 60);
+            theTime = parseInt(theTime % 60);
+            if (theTime1 > 60) {
+                theTime2 = parseInt(theTime1 / 60);
+                theTime1 = parseInt(theTime1 % 60);
+            }
+        }
+        var result = "" + parseInt(theTime) + "秒";
+        if (theTime1 > 0) {
+            result = "" + parseInt(theTime1) + "分" + result;
+        }
+        if (theTime2 > 0) {
+            result = "" + parseInt(theTime2) + "小时" + result;
+        }
+        return result;
+    }
 </script>

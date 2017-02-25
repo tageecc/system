@@ -5,6 +5,10 @@ body {
     background-image: url("../images/a.jpg") /*tpa=http://www.riaxe.com/marketplace/thin-admin/images/a.jpg*/;
 }
 
+table {
+    width: 100%;
+}
+
 .header {
     background-color: rgba(0, 0, 0, 0.25);
     padding: 10px;
@@ -41,6 +45,10 @@ body {
     display: table;
     width: 100%;
     min-height: 900px;
+}
+
+.mgt {
+    margin-top: 10px;
 }
 
 div.jqplot-table-legend-swatch {
@@ -157,9 +165,11 @@ div.jqplot-table-legend-swatch {
 #side-nav ul#nav li a:hover, #side-nav ul#nav li a:active {
     background-color: rgba(0, 0, 0, 0.30);
 }
-#side-nav ul#nav li a.cur{
+
+#side-nav ul#nav li a.cur {
     background-color: rgba(0, 0, 0, 0.40);
 }
+
 #side-nav ul#nav li a i {
     color: #fff;
     float: left;
@@ -469,8 +479,8 @@ div.jqplot-table-legend-swatch {
         width: 600px !important;
     }
 
-    .lable-padd {
-        padding: 1px 0px;
+    .lable-padd label {
+        padding: 1px 0;
         text-align: right !important;
     }
 }
@@ -513,8 +523,8 @@ div.jqplot-table-legend-swatch {
         width: 600px !important;
     }
 
-    .lable-padd {
-        padding: 1px 0px;
+    .lable-padd label {
+        padding: 1px 0;
         text-align: right !important;
     }
 }

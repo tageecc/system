@@ -5,6 +5,7 @@ let _ = require('lodash');
 let os = require("os");
 let osUtils = require("os-utils");
 let ps = require('current-processes');
+let util = require('../util/util');
 require('shelljs/global');
 
 router.get('/', function (req, res, next) {
@@ -37,11 +38,12 @@ router.get('/sysinfo', function (req, res, next) {
         hostname: os.hostname(),
         homedir: os.homedir(),
         cpu: os.cpus(),
-        mem: os.totalmem,
+        mem: util.bytesToSize(os.totalmem()),
         uptime: parseInt(os.uptime()),
         network: os.networkInterfaces()
     };
-    console.log(data);
+    var a=os.networkInterfaces();
+    console.log(a);
     res.render('admin/admin-sysinfo', Object.assign({}, data, {cur: 'sysinfo'}));
 });
 
@@ -72,9 +74,9 @@ router.get('/website', function (req, res, next) {
         data.conf = nginx.stderr.match(/--conf-path=(\S+)\s/)[1];
 
         let config = fs.existsSync(data.conf) ? fs.readFileSync(data.conf, "utf-8") : '';
-        config.split('\n').filter(item =>{
+        config.split('\n').filter(item => {
             console.log(item[0]);
-            return  item[0] != '#';
+            return item[0] != '#';
         }).join('');
         console.log(config);
     }
