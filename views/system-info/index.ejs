@@ -1,0 +1,47 @@
+<% layout('layout.ejs') %>
+<div class="content container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <ul id="sysInfoTabs" class="nav nav-tabs sysinfo-tab">
+                        <li role="presentation" class="active">
+                            <a href="#general" id="general-tab" data-toggle="tab" aria-expanded="true">概览</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#network" id="network-tab" data-toggle="tab" aria-expanded="true">网络</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#service" id="service-tab" data-toggle="tab" aria-expanded="true">服务</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#system" id="system-tab" data-toggle="tab" aria-expanded="true">系统</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#hardware" id="hardware-tab" data-toggle="tab" aria-expanded="true">硬件</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widget-content">
+                    <div id="tabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="general">
+                            <% include general %>
+                        </div>
+                        <div class="tab-pane fade" id="network">
+                            <% include network %>
+                        </div>
+                        <div class="tab-pane fade" id="service">
+                            <% include service %>
+                        </div>
+                        <div class="tab-pane fade" id="system">
+                            <% include system %>
+                        </div>
+                        <div class="tab-pane fade" id="hardware">
+                            <% include hardware %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

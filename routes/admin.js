@@ -9,10 +9,10 @@ let util = require('../util/util');
 require('shelljs/global');
 
 router.get('/', function (req, res, next) {
-    res.redirect('/admin/sysinfo');
+    res.redirect('/admin/system-info');
 });
 router.get('/process', function (req, res, next) {
-    res.render('admin/admin-process', {cur: 'process'});
+    res.render('admin-process', {cur: 'process'});
 });
 router.post('/process', function (req, res, next) {
     ps.get(function (err, processes) {
@@ -22,7 +22,7 @@ router.post('/process', function (req, res, next) {
 });
 
 router.get('/performance', function (req, res, next) {
-    res.render('admin/admin-performance', {cur: 'performance'});
+    res.render('admin-performance', {cur: 'performance'});
 });
 router.post('/performance', function (req, res, next) {
     osUtils.cpuUsage(function (value) {
@@ -30,7 +30,7 @@ router.post('/performance', function (req, res, next) {
     });
 });
 
-router.get('/sysinfo', function (req, res, next) {
+router.get('/system-info', function (req, res, next) {
     let data = {
         arch: os.arch(),
         platform: os.platform(),
@@ -42,7 +42,7 @@ router.get('/sysinfo', function (req, res, next) {
         uptime: parseInt(os.uptime()),
         network: os.networkInterfaces()
     };
-    res.render('admin/admin-sysinfo', Object.assign({}, data, {cur: 'sysinfo'}));
+    res.render('system-info/index', Object.assign({}, data, {cur: 'system-info'}));
 });
 
 router.get('/nginx', function (req, res, next) {
@@ -54,7 +54,7 @@ router.get('/nginx', function (req, res, next) {
         data.version = nginx.stderr.match(/nginx\/[0-9]+\.[0-9]+\.[0-9]+/);
         data.conf = nginx.stderr.match(/--conf-path=(\S+)\s/)[1]
     }
-    res.render('admin/admin-nginx', {data: data, cur: 'nginx'});
+    res.render('admin-nginx', {data: data, cur: 'nginx'});
 });
 /**
  * 安装nginx
@@ -80,7 +80,7 @@ router.get('/website', function (req, res, next) {
         console.log(config);
     }
     // console.log(data);
-    res.render('admin/admin-website', {data: data, cur: 'website'});
+    res.render('admin-website', {data: data, cur: 'website'});
 });
 
 module.exports = router;

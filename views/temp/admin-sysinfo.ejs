@@ -1,4 +1,4 @@
-<% layout('admin/layout.html') %>
+<% layout('layout.ejs') %>
 <script src="//cdn.bootcss.com/moment.js/2.16.0/moment.min.js"></script>
 <script src="//cdn.bootcss.com/moment.js/2.17.1/locale/zh-cn.js"></script>
 
@@ -15,46 +15,46 @@
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">系统内核</label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=kernel%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%= kernel %>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">主机名</label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=hostname%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%= hostname %>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">CPU</label>
-                                <%cpu.forEach(function(v,i){%>
-                                <%if(i==0){%>
+                                <% cpu.forEach(function(v, i){ %>
+                                <% if(i == 0){ %>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=v.model%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%= v.model %>" class="form-control mask" readonly/>
                                 </div>
-                                <%}else{%>
+                                <% }else{ %>
                                 <div class="col-sm-6 col-sm-offset-3 mgt">
-                                    <input type="text" value="<%=v.model%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%= v.model %>" class="form-control mask" readonly/>
                                 </div>
-                                <%}%>
-                                <%})%>
+                                <% } %>
+                                <% }) %>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">内存</label>
                                 <div class="col-sm-6">
-                                    <input type="text" value="<%=mem%>" class="form-control mask" readonly/>
+                                    <input type="text" value="<%= mem %>" class="form-control mask" readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">开机时间</label>
                                 <div class="col-sm-6">
-                                    <input id="uptime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                    <input id="uptime" type="text" data-value="<%= uptime %>" class="form-control mask"
                                            readonly/>
                                 </div>
                             </div>
                             <div class="form-group lable-padd">
                                 <label class="col-sm-3">运行时间</label>
                                 <div class="col-sm-6">
-                                    <input id="runtime" type="text" data-value="<%=uptime%>" class="form-control mask"
+                                    <input id="runtime" type="text" data-value="<%= uptime %>" class="form-control mask"
                                            readonly/>
                                 </div>
                             </div>
@@ -62,15 +62,15 @@
                                 <label class="col-sm-3">网络</label>
                                 <div class="col-sm-6 mgt">
                                     <div id="accordion2" class="panel-group">
-                                        <%Object.keys(network).forEach(function(v,i){%>
+                                        <% Object.keys(network).forEach(function(v, i){ %>
                                         <div class="panel">
                                             <div class="panel-heading">
-                                                <a href="#<%=v%>" data-parent="#accordion2"
+                                                <a href="#<%= v %>" data-parent="#accordion2"
                                                    data-toggle="collapse"
                                                    class="accordion-toggle collapsed">网卡名：
-                                                    <%=v%> </a>
+                                                    <%= v %> </a>
                                             </div>
-                                            <div style="height: 0;" class="panel-collapse collapse" id="<%=v%>">
+                                            <div style="height: 0;" class="panel-collapse collapse" id="<%= v %>">
                                                 <div class="panel-body">
                                                     <table cellpadding="0" cellspacing="0" border="0" class="display"
                                                            id="example">
@@ -83,20 +83,20 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <%network[v].forEach(function(vv,ii){%>
+                                                        <% network[v].forEach(function(vv, ii){ %>
                                                         <tr class="gradeX">
-                                                            <td><%=vv.family%></td>
-                                                            <td><%=vv.address%></td>
-                                                            <td><%=vv.netmask%></td>
-                                                            <td><%=vv.mac%></td>
+                                                            <td><%= vv.family %></td>
+                                                            <td><%= vv.address %></td>
+                                                            <td><%= vv.netmask %></td>
+                                                            <td><%= vv.mac %></td>
                                                         </tr>
-                                                        <%})%>
+                                                        <% }) %>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                             </div>
                                         </div>
-                                        <%})%>
+                                        <% }) %>
                                     </div>
                                 </div>
                             </div>
