@@ -54,7 +54,7 @@
             if (res.code == 1) {
 
                 $('#nowtime').text(moment(res.data.nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a')).attr('data-time', res.data.nowtime);
-                $('#runtime').text(secondFormat(res.data.uptime++)).attr('data-time', res.data.nowtime);
+                $('#runtime').text(secondFormat(res.data.uptime)).attr('data-time', res.data.uptime);
 
                 $('#uptime').text(moment().subtract(res.data.uptime, "seconds").format('YYYY年 MM月 DD日 dddd HH:mm:ss a'));
                 $('#freetime').text(secondFormat(res.data.freetime));
@@ -70,11 +70,12 @@
 
     //    动态显示实时时间
     function refreshTime() {
-        var nowtime = $('#nowtime').attr('data-time');
-        var runtime = $('#runtime').attr('data-time');
-
-        $('#nowtime').text(moment(nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a')).attr('data-time', nowtime++);
-        $('#runtime').text(secondFormat(runtime)).attr('data-time', runtime++);
+        var nowtime = parseInt($('#nowtime').attr('data-time'));
+        console.log(nowtime);
+        console.log(moment(nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a'),moment(nowtime).isValid());
+        var runtime = parseInt($('#runtime').attr('data-time'));
+        $('#nowtime').text(moment(nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a')).attr('data-time', ++nowtime);
+        $('#runtime').text(secondFormat(nowtime)).attr('data-time', ++runtime);
 
         timer && clearTimeout(timer);
         timer = setTimeout(refreshTime, 1000);
