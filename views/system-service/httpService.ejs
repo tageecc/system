@@ -1,0 +1,35 @@
+<% layout('layout.ejs') %>
+<div class="content container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <ul id="sysInfoTabs" class="nav nav-tabs sysinfo-tab">
+                        <li class="active">
+                            <a href="#nginx" id="nginx-tab" data-toggle="tab" aria-expanded="true">Nginx</a>
+                        </li>
+                        <li>
+                            <a href="#apache" id="apache-tab" data-toggle="tab" aria-expanded="true">Apache</a>
+                        </li>
+                        <li>
+                            <a href="#tomcat" id="tomcat-tab" data-toggle="tab" aria-expanded="true">Tomcat</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="widget-content">
+                    <div id="tabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="nginx">
+                            1
+                        </div>
+                        <div class="tab-pane fade" id="apache">
+                            2
+                        </div>
+                        <div class="tab-pane fade" id="tomcat">
+                            3
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
