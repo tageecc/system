@@ -7,16 +7,20 @@
     <tbody>
     <tr>
         <td width="200">服务器时间</td>
-        <td>2017年 3月 4日 17:51:35</td>
+        <td id="nowtime"></td>
     </tr>
     <tr>
         <td>启动时间</td>
-        <td>2017年 3月 4日 17:51:35</td>
+        <td id="uptime"></td>
+    </tr>
+    <tr>
+        <td>运行时间</td>
+        <td id="runtime"></td>
     </tr>
     <tr>
         <td>空闲时间</td>
         <td>
-            <p>6 天 12 小时 23 分钟 21 秒<span class="label label-success">50%空闲</span></p>
+            <p id="freetime">6 天 12 小时 23 分钟 21 秒<span class="label label-success">50%空闲</span></p>
         </td>
     </tr>
     <tr>
@@ -42,3 +46,69 @@
     </tr>
     </tbody>
 </table>
+<script>
+    var timer;
+    $('#general-tab').on('click', function (e) {
+        var _this = $(this), process = new Process();
+        $.post('/admin/system-info/general', function (res) {
+            if (res.code == 1) {
+
+                $('#nowtime').text(moment(res.data.nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a')).attr('data-time', res.data.nowtime);
+                $('#runtime').text(secondFormat(res.data.uptime++)).attr('data-time', res.data.nowtime);
+
+                $('#uptime').text(moment().subtract(res.data.uptime, "seconds").format('YYYY年 MM月 DD日 dddd HH:mm:ss a'));
+                $('#freetime').text(secondFormat(res.data.freetime));
+
+                refreshTime();
+
+                process.update(100);
+                $(_this).tab('show');
+            }
+        })
+        return false;
+    })
+
+    //    动态显示实时时间
+    function refreshTime() {
+        var nowtime = $('#nowtime').attr('data-time');
+        var runtime = $('#runtime').attr('data-time');
+
+        $('#nowtime').text(moment(nowtime).format('YYYY年 MM月 DD日 dddd HH:mm:ss a')).attr('data-time', nowtime++);
+        $('#runtime').text(secondFormat(runtime)).attr('data-time', runtime++);
+
+        timer && clearTimeout(timer);
+        timer = setTimeout(refreshTime, 1000);
+    }
+
+    function secondFormat(second) {
+        if (second === 0) return '0秒';
+
+        second = parseInt(second);// 秒
+        let mim = 0;// 分
+        let hour = 0;// 小时
+        let day = 0;
+        if (second > 60) {
+            mim = parseInt(second / 60);
+            second = parseInt(second % 60);
+            if (mim > 60) {
+                hour = parseInt(hour / 60);
+                mim = parseInt(mim % 60);
+                if (hour > 24) {
+                    day = parseInt(hour / 24);
+                    hour = parseInt(hour % 24);
+                }
+            }
+        }
+        let result = "" + parseInt(second) + "秒";
+        if (mim > 0) {
+            result = "" + mim + "分" + result;
+        }
+        if (hour > 0) {
+            result = "" + hour + "小时" + result;
+        }
+        if (day > 0) {
+            result = "" + day + "天" + result;
+        }
+        return result;
+    }
+</script>

@@ -6,7 +6,6 @@ let os = require("os");
 let osUtils = require("os-utils");
 let ps = require('current-processes');
 let util = require('../util/util');
-require('shelljs/global');
 
 router.get('/', function (req, res, next) {
     res.redirect('/admin/system-info');

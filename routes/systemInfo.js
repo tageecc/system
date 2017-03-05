@@ -3,18 +3,28 @@ let util = require('../util/util');
 
 module.exports = {
     general: (req, res, next) => {
-        let data = {
-            arch: os.arch(),
-            platform: os.platform(),
-            kernel: os.platform() + '  ' + os.release(),
-            hostname: os.hostname(),
-            homedir: os.homedir(),
-            cpu: os.cpus(),
-            mem: util.bytesToSize(os.totalmem()),
-            uptime: parseInt(os.uptime()),
-            network: os.networkInterfaces()
-        };
-        res.render('system-info/index', data);
+        res.render('system-info/index',{});
+    },
+    generalData: (req, res, next) => {
+        let result = {};
+        try {
+            let freetime = exec('cat /proc/uptime').stdout.split(' ');
+            result = {
+                code: 1,
+                data:{
+                    nowtime: +new Date(),
+                    uptime: parseInt(os.uptime()),
+                    freetime: parseInt(freetime[1])
+                }
+            };
+
+        } catch (e) {
+            result = {code: -1, message: 'err'}
+        }
+
+        console.log(result);
+
+        res.json(result);
     },
     network: (req, res, next) => {
         res.json({});

@@ -7,8 +7,10 @@ let file = require('./file');
 let setting = require('./setting');
 
 // 系统信息
+router.get('/admin', systemInfo.general);
 router.get('/admin/system-info', systemInfo.general);
 router.get('/admin/system-info/general', systemInfo.general);
+router.post('/admin/system-info/general', systemInfo.generalData);
 router.get('/admin/system-info/network', systemInfo.network);
 router.get('/admin/system-info/service', systemInfo.service);
 router.get('/admin/system-info/system', systemInfo.system);
