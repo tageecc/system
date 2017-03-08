@@ -3,28 +3,38 @@ let util = require('../util/util');
 
 module.exports = {
     general: (req, res, next) => {
-        res.render('system-info/index',{});
+        res.render('system-info/index', {});
     },
-    generalData: (req, res, next) => {
+    getGeneral: (req, res, next) => {
+        res.writeHead(200, {
+            'Content-Type': 'text/event-stream',
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive'
+        });
         let result = {};
-        try {
-            let freetime = exec('cat /proc/uptime').stdout.split(' ');
-            result = {
-                code: 1,
-                data:{
-                    nowtime: +new Date(),
-                    uptime: parseInt(os.uptime()),
-                    freetime: parseInt(freetime[1])
-                }
-            };
+        let timer = setInterval(() => {
+            try {
+                let freetime = exec('cat /proc/uptime').stdout.split(' ');
+                result = {
+                    code: 1,
+                    data: {
+                        nowtime: +new Date(),
+                        uptime: parseInt(os.uptime()),
+                        freetime: parseInt(freetime[1])
+                    }
+                };
 
-        } catch (e) {
-            result = {code: -1, message: 'err'}
-        }
+            } catch (e) {
+                result = {code: -1, message: 'err'}
+            }
+            res.write("data: " + JSON.stringify(result) + "\n\n");
+        }, 1000);
 
-        console.log(result);
-
-        res.json(result);
+        req.connection.on("close", () => {
+            res.end();
+            clearInterval(timer);
+            console.log("Client closed connection. Aborting.");
+        });
     },
     network: (req, res, next) => {
         res.json({});

@@ -12,6 +12,7 @@
 
     <script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/vue/2.2.1/vue.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -170,8 +171,6 @@
 <div class="bottom-nav footer">
     2017 &copy; 塔歌
 </div>
-<script src="//cdn.bootcss.com/moment.js/2.16.0/moment.min.js"></script>
-<script src="//cdn.bootcss.com/moment.js/2.17.1/locale/zh-cn.js"></script>
 <script>
     $(function () {
         $('#nav li').on('click', function (e) {
@@ -211,23 +210,6 @@
             }
         })
     });
-</script>
-<script>
-    /*进度条*/
-    function Process() {
-        this.process = $('<div class="progress"><span class="peg"></span></div>')
-        $("body").append(this.process);
-    }
-    Process.prototype.update = function (persent) {
-        var _this = this;
-        this.process.css('width', persent + '%');
-        if (persent == 100) {
-            _this.process.fadeOut(function () {
-                _this.process.remove();
-            });
-
-        }
-    }
 </script>
 </body>
 </html>
