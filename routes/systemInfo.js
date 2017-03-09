@@ -1,16 +1,13 @@
 let os = require("os");
 let util = require('../util/util');
+let sse = require('../middleware/sse');
 
 module.exports = {
     general: (req, res, next) => {
         res.render('system-info/index', {});
     },
     getGeneral: (req, res, next) => {
-        res.writeHead(200, {
-            'Content-Type': 'text/event-stream',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive'
-        });
+        res.sseSetup();
         let result = {};
         let timer = setInterval(() => {
             try {
@@ -27,13 +24,11 @@ module.exports = {
             } catch (e) {
                 result = {code: -1, message: 'err'}
             }
-            res.write("data: " + JSON.stringify(result) + "\n\n");
+            res.sseSend(result);
         }, 1000);
 
-        req.connection.on("close", () => {
-            res.end();
+        req.sseClose(req.connection,function () {
             clearInterval(timer);
-            console.log("Client closed connection. Aborting.");
         });
     },
     network: (req, res, next) => {

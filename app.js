@@ -4,6 +4,7 @@ let favicon = require('serve-favicon');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+let sse = require('./middleware/sse');
 require('shelljs/global');
 
 let app = express();
@@ -23,8 +24,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // 定义视图全局变量
-global._moment = require('moment');
-global._moment.locale('zh-cn');
+
+// 定制中间件
+app.use(sse);
 
 // 定义路由
 app.use('/', require('./routes'));

@@ -15,7 +15,7 @@
     </tr>
     <tr>
         <td>运行时间</td>
-        <td></td>
+        <td>{{ runtime }}</td>
     </tr>
     <tr>
         <td>空闲时间</td>
@@ -55,6 +55,8 @@
                 nowtime: '',
                 uptime: '',
                 freetime: '',
+                runtime:'',
+                cpu:''
             }
         });
         var es = new EventSource("/admin/system-info/general/data");
