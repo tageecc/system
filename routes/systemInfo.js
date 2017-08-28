@@ -1,6 +1,5 @@
 let os = require("os");
 let util = require('../util/util');
-let sse = require('../middleware/sse');
 
 module.exports = {
     general: (req, res, next) => {
