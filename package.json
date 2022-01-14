@@ -16,6 +16,6 @@
     "morgan": "~1.7.0",
     "os-utils": "0.0.14",
     "serve-favicon": "~2.3.2",
-    "shelljs": "^0.7.6"
+    "shelljs": "^0.8.5"
   }
 }
